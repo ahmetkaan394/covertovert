@@ -1,18 +1,29 @@
 {
-  "covert_channel_code": "Replace it with the [Code] of chosen covert channel type seen in ODTUClass.",
+  "covert_channel_code": "CSC-PSV-ICMP-CODE",
   "send": {
     "parameters": {
-      "parameter1": "p1",
-      "parameter2": 1234,
-      "log_file_name": "Example_UDPTimingInterarrivalChannelSender.log"
+      "receiver_ip": "172.18.0.3",
+      "bit_code_mapping": {
+        "00": [12, 15],
+        "01": [8, 11],
+        "10": [4, 7],
+        "11": [0, 3]
+      },
+      "log_file_name": "ICMPCodeFieldChannelSender.log"
     }
   },
   "receive": {
     "parameters": {
-      "parameter1": "p1",
-      "parameter2": 1234,
-      "parameter3": "p3",
-      "log_file_name": "Example_UDPTimingInterarrivalChannelReceiver.log"
+      "receiver_ip": "172.18.0.3",
+      "bit_code_mapping": {
+        "00": [12, 15],
+        "01": [8, 11],
+        "10": [4, 7],
+        "11": [0, 3]
+      },
+      "sender_ip": "172.18.0.2",
+      "log_file_name": "ICMPCodeFieldChannelReceiver.log"
     }
   }
 }
+
