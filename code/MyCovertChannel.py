@@ -17,7 +17,7 @@ class MyCovertChannel(CovertChannelBase):
         """
         pass
 
-    def send(self, log_file_name, receiver_ip, bit_code_mapping):
+    def send(self, log_file_name, receiver_ip, bit_code_mapping, eight):
         """
         This function encodes a randomly generated binary message into ICMP packets and sends them as part of a covert channel.
         
@@ -25,15 +25,16 @@ class MyCovertChannel(CovertChannelBase):
         1. Generates a random binary message using the generate_random_binary_message_with_logging function and logs it to the specified log file.
         2. Ensures the message length is a multiple of 8 (byte-aligned) by prepending leading zeros if necessary.
         3. Encodes the binary message two bits at a time:
-            - Looks up the corresponding ICMP code range for the two bits using the bit_code_mapping dictionary.
-            - Selects a random integer within the specified range and assigns it to the code field of an ICMP Echo Request (type 8) packet.
+        	- Looks up the corresponding ICMP code range for the two bits using the bit_code_mapping dictionary.
+        	- Selects a random integer within the specified range and assigns it to the code field of an ICMP Echo Request (type 8) packet.
         4. Sends each packet using the send function from the CovertChannelBase.py file.  
         """
 
         binary_message = self.generate_random_binary_message_with_logging(log_file_name)
 
-        if len(binary_message) % 8 != 0:
-            padding_length = 8 - (len(binary_message)%8)
+        # Do not change the parameter eight as it is the byte length (1 byte = 8 bits)
+        if len(binary_message) % eight != 0:
+            padding_length = eight - (len(binary_message)%eight)
             binary_message = '0' * padding_length + binary_message
 
         for i in range(0, len(binary_message), 2):
